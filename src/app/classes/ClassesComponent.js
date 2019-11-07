@@ -18,6 +18,8 @@ import {
 } from 'reactstrap'
 import ReactTable from 'react-table'
 
+
+
 class ClassesComponent extends Component {
 
     constructor(props) {
@@ -100,7 +102,7 @@ class ClassesComponent extends Component {
                 </Card>
                 <Modal isOpen={this.state.modal} toggle={() => this.setState({ modal: !this.state.modal })}
                     className={'modal-info modal-lg ' + this.props.className}>
-                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>Menu</ModalHeader>
+                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>Class</ModalHeader>
                     <ModalBody>
                         <Container>
                             <Form className="form-horizontal">
@@ -110,12 +112,12 @@ class ClassesComponent extends Component {
                                         <Label htmlFor="hf-name">Mã lớp</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='text' />
+                                        Mã lớp
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col md="3">
-                                        <Label htmlFor="hf-name">Ngày tạo</Label>
+                                        <Label htmlFor="hf-name">Lịch học</Label>
                                     </Col>
                                     <Col xs="12" md="9">
                                         <Input type='text' />
@@ -141,19 +143,18 @@ class ClassesComponent extends Component {
                                     <Col md="3">
                                         <Label htmlFor="hf-name">Trạng thái</Label>
                                     </Col>
-
-                                </FormGroup>
-                                <hr />
-
-                                <FormGroup>
-                                    <h5>Thông tin giảng viên</h5>
+                                    <Col xs="12" md="9">
+                                        status
+                                    </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col md="3">
                                         <Label htmlFor="hf-name">Mã giảng viên</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='text' />
+                                        <Input type='select'>
+                                        <option>dfsd</option>
+                                        </Input>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -161,34 +162,18 @@ class ClassesComponent extends Component {
                                         <Label htmlFor="hf-name">Tên giảng viên</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='text' />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Col md="3">
-                                        <Label htmlFor="hf-name">Email</Label>
-                                    </Col>
-                                    <Col xs="12" md="9">
-                                        <Input type='text' />
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Col md="3">
-                                        <Label htmlFor="hf-name">Số điện thoại</Label>
-                                    </Col>
-                                    <Col xs="12" md="9">
-                                        <Input type='text' />
+                                        ten
                                     </Col>
                                 </FormGroup>
                                 <hr />
-                                <h5>Thông tin học viên</h5>
+                                <h5>Danh sách học viên</h5>
                                 Table học vien
                             </Form>
                         </Container>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={() => this.setState({ modal: !this.state.modal })}>OK</Button>{' '}
-                        <Button color="primary" onClick={() => this.setState({ modal: !this.state.modal })}>Cancel</Button>{' '}
+                        <Button color="primary" onClick={() => this.setState({ modal: !this.state.modal })}>Lưu</Button>{' '}
+                        <Button color="primary" onClick={() => this.setState({ modal: !this.state.modal })}>Thoát</Button>{' '}
                     </ModalFooter>
                 </Modal>
             </div>

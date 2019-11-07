@@ -46,6 +46,11 @@ class ResourcesComponent extends Component {
                 show: true
             },
             {
+                Header: 'Mã',
+                accessor: 'id',
+                show: true
+            },
+            {
                 Header: 'Loại',
                 accessor: 'name',
                 show: true
@@ -114,52 +119,44 @@ class ResourcesComponent extends Component {
                     </CardBody>
                 </Card>
                 <Modal isOpen={this.state.modal} toggle={() => this.setState({ modal: !this.state.modal })}
-                    className={'modal-info modal-lg ' + this.props.className}>
-                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>$ Tên tài sản</ModalHeader>
+                    className={'modal-info ' + this.props.className}>
+                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>$ Mã tài sản</ModalHeader>
                     <ModalBody>
                         <Container>
-                            <Card>
-                                <CardBody>
-                                    <h5>Thông tin tài sản</h5>
-                                    <hr />
-                                    <Form className="form-horizontal">
-                                        <FormGroup row>
-                                            <Col md="3">
-                                                <Label htmlFor="hf-name">Tên</Label>
+                            <Form className="form-horizontal">
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label htmlFor="hf-name">Tên</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        tên
                                             </Col>
-                                            <Col xs="12" md="9">
-                                                tên
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label htmlFor="hf-name">Cơ sở</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        cơ sở
                                             </Col>
-                                        </FormGroup>
-                                        <FormGroup row>
-                                            <Col md="3">
-                                                <Label htmlFor="hf-name">Cơ sở</Label>
-                                            </Col>
-                                            <Col xs="12" md="9">
-                                                cơ sở
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup row>
-                                            <Col md="3">
-                                                <Label htmlFor="hf-name">Số lượng (Gói)</Label>
-                                            </Col>
-                                            <Col xs="12" md="2">
-                                                <Input type='number' />
-                                            </Col>
-                                        </FormGroup>
-                                        <FormGroup row>
-                                            <Col md="3">
-                                                <Label htmlFor="hf-name">Trạng thái</Label>
-                                            </Col>
-                                            <Col xs="12" md="2">
-                                                <Input type='checkbox' />
-                                            </Col>
-                                        </FormGroup>
-                                    </Form>
-                                    <hr />
-                                    <Button color='primary' className="float-right">Update</Button>
-                                </CardBody>
-                            </Card>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label htmlFor="hf-name">Số lượng (Gói)</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <Input type='number' />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label htmlFor="hf-name">Trạng thái</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <Input type='checkbox' />
+                                    </Col>
+                                </FormGroup>
+                            </Form>
                         </Container>
                     </ModalBody>
                     <ModalFooter>

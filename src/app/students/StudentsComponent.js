@@ -104,6 +104,10 @@ class StudentsComponent extends Component {
                                         <option value="">Hoat dong</option>
                                     </Input>
                                     <Input type='select' color="primary" className="float-right select_header">
+                                        <option value="">Tuition</option>
+                                        <option value="">Đã thu</option>
+                                    </Input>
+                                    <Input type='select' color="primary" className="float-right select_header">
                                         <option value="">Chi nhánh</option>{' '}
                                         <option value="thuduc">Thu duc</option>
                                     </Input>
@@ -189,11 +193,7 @@ class StudentsComponent extends Component {
                                         <Label htmlFor="hf-name">Lớp học</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='select'>
-                                            <option value='' unselectable>Lớp học</option>
-                                            <option value=''>SE3232</option>
-                                            <option value=''>JK342</option>
-                                        </Input>
+                                        Lớp học
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -201,7 +201,7 @@ class StudentsComponent extends Component {
                                         <Label htmlFor="hf-status">Trạng thái</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='checkbox' />
+                                        trạng thái
                                     </Col>
                                 </FormGroup>
                             </Form>

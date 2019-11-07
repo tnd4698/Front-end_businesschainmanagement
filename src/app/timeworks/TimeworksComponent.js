@@ -22,7 +22,7 @@ class TimeworksComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { date: new Date(),modal:false }
+        this.state = { date: new Date(), modal: false }
     }
     render() {
         const fakeData = [
@@ -51,7 +51,7 @@ class TimeworksComponent extends Component {
             },
             {
                 Header: 'Active',
-                Cell: row => (<div style={{ textAlign: 'center' }}><Button color='success' onClick={()=>this.setState({modal:!this.state.modal})}>Xem</Button></div>)
+                Cell: row => (<div style={{ textAlign: 'center' }}><Button color='success' onClick={() => this.setState({ modal: !this.state.modal })}>Xem</Button></div>)
             }
         ];
         const ExampleCustomInput = ({ value, onClick }) => (
@@ -66,8 +66,8 @@ class TimeworksComponent extends Component {
                         <div className='l_header'>
                             <Row>
                                 <Col sm="4">
-                                    <h4 className="mb-0" style={{display:"inline"}}><strong>Quản lý thời gian làm việc</strong></h4>{' '}
-                                    <Button outline color='info' style={{display:"inline"}} onClick={() => this.setState({ modal: !this.state.modal })}>+</Button>
+                                    <h4 className="mb-0" style={{ display: "inline" }}><strong>Quản lý thời gian làm việc</strong></h4>{' '}
+                                    <Button outline color='info' style={{ display: "inline" }} onClick={() => this.setState({ modal: !this.state.modal })}>+</Button>
                                     <Form inline>
                                         <DatePicker
                                             dateFormat="dd/MM/yyyy"
@@ -112,7 +112,10 @@ class TimeworksComponent extends Component {
                 </Card>
                 <Modal isOpen={this.state.modal} toggle={() => this.setState({ modal: !this.state.modal })}
                     className={'modal-info modal-lg ' + this.props.className}>
-                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>Timework {(new Date()).toLocaleDateString()}</ModalHeader>
+                    <ModalHeader toggle={() => this.setState({ modal: !this.state.modal })}>
+                        <h5>Timework</h5>
+                        <Input type='date' defaultValue='2019-11-04' />
+                    </ModalHeader>
                     <ModalBody>
                         <Container>
                             <ReactTable
@@ -136,7 +139,7 @@ class TimeworksComponent extends Component {
                                     },
                                     {
                                         Header: 'Active',
-                                        Cell: row => (<div style={{ textAlign: 'center' }}><input type="checkbox" defaultChecked/></div>)
+                                        Cell: row => (<div style={{ textAlign: 'center' }}><input type="checkbox" defaultChecked /></div>)
                                     }
                                 ]}
                             />
