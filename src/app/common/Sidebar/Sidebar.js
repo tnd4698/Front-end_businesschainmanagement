@@ -129,7 +129,7 @@ class Sidebar extends Component {
       <div className="sidebar">
         <nav className="sidebar-nav">
           <Nav>
-            {navList(nav.items2)}
+            {navList(nav.items3)}
           </Nav>
         </nav>
         <SidebarMinimizer/>

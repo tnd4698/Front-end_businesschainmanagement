@@ -51,11 +51,6 @@ class PayrollsComponent extends Component {
                 show: true
             },
             {
-                Header: 'Thành tiền',
-                accessor: 'name',
-                show: true
-            },
-            {
                 Header: 'Các khoản khác',
                 accessor: 'name',
                 show: true

@@ -26,9 +26,9 @@ import 'react-table/react-table.css'
 import "react-datepicker/dist/react-datepicker.css";
 
 // Views
-import Login from './pages/Login'
-import Page404 from './pages/Page404'
-import Page500 from './pages/Page500'
+import Login from './utils/pages/Login'
+import Page404 from './utils/pages/Page404'
+import Page500 from './utils/pages/Page500'
 
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(rootReducer, middleware);
@@ -45,4 +45,3 @@ ReactDOM.render(
     </HashRouter>
   </Provider>,
   document.getElementById('root'));
-
