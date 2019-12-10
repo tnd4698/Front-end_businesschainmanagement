@@ -1,3 +1,15 @@
-import {default as actions} from './actions'
+import { default as actions } from './actions'
+import { getMenuItems } from '../../../api/BranchManagement/branchMamagenent'
 
-export default {actions}
+const getListMenuItem = (branchId) => {
+    return dispatch => {
+        getMenuItems(branchId)
+            .then(res => {
+                dispatch(actions.getMenuItem(res.data));
+            })
+    }
+}
+
+export default {
+    getListMenuItem
+}

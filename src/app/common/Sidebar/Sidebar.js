@@ -4,6 +4,7 @@ import {Badge, Nav, NavItem, NavLink as RsNavLink} from 'reactstrap';
 import classNames from 'classnames';
 import nav from './_nav';
 import SidebarMinimizer from './SidebarMinimizer';
+import { connect } from 'react-redux';
 
 class Sidebar extends Component {
 
@@ -22,7 +23,6 @@ class Sidebar extends Component {
   }
 
   activeRoute(routeName, props) {
-    // return this.props.location.pathname.indexOf(routeName) > -1 ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
     return props.location.pathname.indexOf(routeName) > -1 ? 'nav-item nav-dropdown open' : 'nav-item nav-dropdown';
 
   }
@@ -33,17 +33,10 @@ class Sidebar extends Component {
     }
   }
 
-  // todo Sidebar nav secondLevel
-  // secondLevelActive(routeName) {
-  //   return this.props.location.pathname.indexOf(routeName) > -1 ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
-  // }
-
-
   render() {
 
     const props = this.props;
 
-    // badge addon to NavItem
     const badge = (badge) => {
       if (badge) {
         const classes = classNames( badge.class );
@@ -51,22 +44,18 @@ class Sidebar extends Component {
       }
     };
 
-    // simple wrapper for nav-title item
     const wrapper = item => { return (item.wrapper && item.wrapper.element ? (React.createElement(item.wrapper.element, item.wrapper.attributes, item.name)): item.name ) };
 
-    // nav list section title
     const title =  (title, key) => {
       const classes = classNames( 'nav-title', title.class);
       return (<li key={key} className={ classes }>{wrapper(title)} </li>);
     };
 
-    // nav list divider
     const divider = (divider, key) => {
       const classes = classNames( 'divider', divider.class);
       return (<li key={key} className={ classes }></li>);
     };
 
-    // nav item with nav link
     const navItem = (item, key) => {
       const classes = {
         item: classNames( item.class) ,
@@ -78,7 +67,6 @@ class Sidebar extends Component {
       )
     };
 
-    // nav link
     const navLink = (item, key, classes) => {
       const url = item.url ? item.url : '';
       return (
@@ -96,7 +84,6 @@ class Sidebar extends Component {
       )
     };
 
-    // nav dropdown
     const navDropdown = (item, key) => {
       return (
         <li key={key} className={this.activeRoute(item.url, props)}>
@@ -107,14 +94,12 @@ class Sidebar extends Component {
         </li>)
     };
 
-    // nav type
     const navType = (item, idx) =>
       item.title ? title(item, idx) :
       item.divider ? divider(item, idx) :
       item.children ? navDropdown(item, idx)
                     : navItem(item, idx) ;
 
-    // nav list
     const navList = (items) => {
       return items.map( (item, index) => navType(item, index) );
     };
@@ -124,12 +109,20 @@ class Sidebar extends Component {
       return link === 'http';
     };
 
-    // sidebar-nav root
+    
     return (
       <div className="sidebar">
         <nav className="sidebar-nav">
           <Nav>
-            {navList(nav.items3)}
+            {
+              this.props.role==='[ROLE_BRANCHMANAGER]' && navList(nav.items1)
+            }
+            {
+              this.props.role==='[ROLE_BUSINESSMANAGER]' && navList(nav.items2)
+            }
+            {
+              this.props.role==='[ROLE_ACCOUNTANT]' && navList(nav.items3)
+            }
           </Nav>
         </nav>
         <SidebarMinimizer/>
@@ -138,4 +131,14 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  const role = state.home.role;
+  return {
+    role
+  }
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(Sidebar);

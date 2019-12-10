@@ -27,42 +27,69 @@ class StudentsComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            {
+                id: 'STUDENT2323',
+                name: 'nguyen duy',
+                address: 'HCM',
+                branchName: 'co so 1',
+                status: 1
+            },
+            {
+                id: 'STUDENT2323',
+                name: 'nguyen duy',
+                address: 'HCM',
+                branchName: 'co so 1',
+                status: 1
+            },
+            {
+                id: 'STUDENT2323',
+                name: 'nguyen duy',
+                address: 'HCM',
+                branchName: 'co so 1',
+                status: 1
+            },
+            {
+                id: 'STUDENT2323',
+                name: 'nguyen duy',
+                address: 'HCM',
+                branchName: 'co so 1',
+                status: 1
+            }
         ]
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div></div>),
+                Cell: row => (<div style={{textAlign:"center"}}>1</div>),
                 show: true
             },
             {
                 Header: 'Mã học viên',
                 accessor: 'id',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Họ tên',
                 accessor: 'name',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Lớp học',
                 accessor: 'address',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Cơ sở',
-                accessor: 'address',
+                accessor: 'branchName',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Status',
-                accessor: 'name',
+                accessor: 'status',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {

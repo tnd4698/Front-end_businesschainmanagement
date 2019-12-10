@@ -24,7 +24,7 @@
   "main": "index.js",
   "scripts": {
     "client": "react-scripts start",
-    "server": "cd .. && mvn spring-boot:run",
+    "server": "cd .. && cd busines* && mvn spring-boot:run",
     "dev": "concurrently 'npm run server' 'npm run client'",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +46,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "antd": "^3.25.3",
     "concurrently": "^5.0.0"
   }
 }

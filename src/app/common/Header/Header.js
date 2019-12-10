@@ -6,7 +6,7 @@ import {
   // NavItem,
   // NavLink,
 } from 'reactstrap';
-import HeaderDropdown from './HeaderDropdown';
+import {default as HeaderDropdown} from './HeaderDropdown';
 
 class Header extends Component {
 

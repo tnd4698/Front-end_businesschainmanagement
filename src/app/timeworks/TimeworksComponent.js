@@ -26,27 +26,27 @@ class TimeworksComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            { branchName: 'name1', age: 50, date: '04/12/2019' },
+            { branchName: 'name1', age: 50, date: '04/12/2019' },
+            { branchName: 'name1', age: 50, date: '04/12/2019' },
+            { branchName: 'name1', age: 50, date: '05/12/2019' }
         ]
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div></div>),
+                Cell: row => (<div style={{textAlign:"center"}}></div>),
                 show: true
             },
             {
                 Header: 'Cơ sở',
-                accessor: 'address',
+                accessor: 'branchName',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Ngày',
-                accessor: 'name',
+                accessor: 'date',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {

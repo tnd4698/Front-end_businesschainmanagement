@@ -23,12 +23,7 @@ class BillReportComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            
         ]
         const columns = [
             {
@@ -96,8 +91,9 @@ class BillReportComponent extends Component {
                         <Container fluid>
                             <ReactTable
                                 data={fakeData}
-                                minRows={0}
+                                minRows={5}
                                 columns={columns}
+                                showPagination={false}
                             />
                         </Container>
                     </CardBody>

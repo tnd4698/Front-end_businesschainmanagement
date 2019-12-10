@@ -27,12 +27,11 @@ class ResourcesComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            {
+                ID:'MTL3794279',
+                name:'Cafe chồn',
+                
+            }
         ]
         const columns = [
             {
@@ -42,32 +41,32 @@ class ResourcesComponent extends Component {
             },
             {
                 Header: 'Tên',
-                accessor: 'id',
-                show: true
-            },
-            {
-                Header: 'Mã',
-                accessor: 'id',
-                show: true
-            },
-            {
-                Header: 'Loại',
                 accessor: 'name',
                 show: true
             },
             {
+                Header: 'Mã',
+                accessor: 'ID',
+                show: true
+            },
+            {
+                Header: 'Loại',
+                accessor: 'type',
+                show: true
+            },
+            {
                 Header: 'Cơ sở ',
-                accessor: 'address',
+                accessor: 'branchName',
                 show: true
             },
             {
                 Header: 'Số lượng',
-                accessor: 'address',
+                accessor: 'count',
                 show: true
             },
             {
                 Header: 'Trạng thái',
-                accessor: 'address',
+                accessor: 'status',
                 show: true
             },
             {
@@ -112,7 +111,7 @@ class ResourcesComponent extends Component {
                         <Container fluid>
                             <ReactTable
                                 data={fakeData}
-                                minRows={0}
+                                minRows={5}
                                 columns={columns}
                             />
                         </Container>

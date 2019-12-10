@@ -18,6 +18,6 @@ export function addBranch(branchDTO) {
     return httpPost(BASE_URL, branchDTO);
 }
 
-export function addBranch(branchId, branchDTO) {
+export function updateBranch(branchId, branchDTO) {
     return httpPut(BASE_URL + `${branchId}`, branchDTO);
 }

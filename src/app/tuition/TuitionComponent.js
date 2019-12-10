@@ -40,7 +40,7 @@ class TuitionComponent extends Component {
                                         <Input type='select' id="hf-id" name="hf-id" />
                                     </Col>
                                     <Col xs="12" md="1">
-                                        <Button color='primary'><i class="fas fa-list"></i></Button>
+                                        <Button color='primary'><i className="fas fa-list"></i></Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

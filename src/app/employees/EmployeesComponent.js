@@ -27,17 +27,35 @@ class EmployeesComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            {
+                id:'EMPLOYEE29347',
+                name:'nguyen duy tan',
+                address:'',
+                branchName:'',
+                roleName:'',
+                status:''
+            },
+            {
+                id:'EMPLOYEE29347',
+                name:'nguyen duy tan',
+                address:'',
+                branchName:'',
+                roleName:'',
+                status:''
+            },
+            {
+                id:'EMPLOYEE29347',
+                name:'nguyen duy tan',
+                address:'',
+                branchName:'',
+                roleName:'',
+                status:''
+            }
         ]
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div></div>),
+                Cell: row => (<div style={{textAlign:"center"}}>1</div>),
                 show: true
             },
             {
@@ -52,17 +70,17 @@ class EmployeesComponent extends Component {
             },
             {
                 Header: 'Cơ sở làm việc',
-                accessor: 'address',
+                accessor: 'branchName',
                 show: true
             },
             {
                 Header: 'Chức vụ',
-                accessor: 'address',
+                accessor: 'roleName',
                 show: true
             },
             {
                 Header: 'Status',
-                accessor: 'name',
+                accessor: 'status',
                 show: true
             },
             {

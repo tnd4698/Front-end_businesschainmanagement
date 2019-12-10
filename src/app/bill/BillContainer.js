@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
 import BillComponent from './BillComponent';
 
-
-import {default as actions }from'./duck/actions'
+import { billOperations } from './duck'
 
 const mapStateToProps = (state) => {
-  const { toggleText } = state.bill;
   return {
-    toggleText
+    listMenuItem: state.bill.listMenuItem,
+    user : state.home.userInfo
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
-    fetchN:(text) => dispatch(actions.fetchN(text))
+  const getListMenuItem = (branchId) => dispatch(billOperations.getListMenuItem(branchId));
+
+  return {
+    getListMenuItem
   }
 };
 

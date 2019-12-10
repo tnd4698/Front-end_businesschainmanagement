@@ -9,6 +9,7 @@ import {
     Label,
     Button
 } from 'reactstrap'
+import ReactTable from 'react-table'
 
 class BranchDetailComponent extends Component {
 
@@ -81,7 +82,39 @@ class BranchDetailComponent extends Component {
                             </FormGroup>
                             <hr />
                             <h5>Các điều khoản quy định</h5>
-                            React table
+                            <ReactTable
+                                minRows={0}
+                                showPagination={false}
+                                columns={[
+                                    {
+                                        Header: '#',
+                                        Cell: row => (<div></div>),
+                                        show: true
+                                    },
+                                    {
+                                        Header: 'Tên quy định',
+                                        accessor: 'name',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.data}</div>),
+                                        show: true
+                                    },
+                                    {
+                                        Header: 'nội dung',
+                                        accessor: 'value',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.data}</div>),
+                                        show: true
+                                    },
+                                    {
+                                        Header: 'Loại quy định',
+                                        accessor: 'type',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.data}</div>),
+                                        show: true
+                                    }
+                                ]}
+                                data={[{
+                                    name: 'Số nhân viên tối đa',
+                                    value: '5',
+                                    type: 'contract'
+                                }]} />
                             <Button color='primary' className='float-right'>Lưu</Button>
                         </Container>
                     </CardBody>

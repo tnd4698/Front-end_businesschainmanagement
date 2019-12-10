@@ -22,16 +22,11 @@ class TuitionReportComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { date: new Date(),modal:false }
+        this.state = { date: new Date(), modal: false }
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+
         ]
         const columns = [
             {
@@ -62,7 +57,7 @@ class TuitionReportComponent extends Component {
                         <div className='l_header'>
                             <Row>
                                 <Col sm="4">
-                                    <h4 className="mb-0" style={{display:"inline"}}><strong>Thống kê doanh thu giảng dạy</strong></h4>{' '}
+                                    <h4 className="mb-0" style={{ display: "inline" }}><strong>Thống kê doanh thu giảng dạy</strong></h4>{' '}
                                     <Form inline>
                                         <DatePicker
                                             dateFormat="dd/MM/yyyy"
@@ -99,8 +94,9 @@ class TuitionReportComponent extends Component {
                         <Container fluid>
                             <ReactTable
                                 data={fakeData}
-                                minRows={0}
+                                minRows={5}
                                 columns={columns}
+                                showPagination={false}
                             />
                         </Container>
                     </CardBody>
@@ -131,11 +127,11 @@ class TuitionReportComponent extends Component {
                                     },
                                     {
                                         Header: 'Description',
-                                        Cell: row => (<div style={{ textAlign: 'center' }}><Input type='text'/></div>)
+                                        Cell: row => (<div style={{ textAlign: 'center' }}><Input type='text' /></div>)
                                     },
                                     {
                                         Header: 'Active',
-                                        Cell: row => (<div style={{ textAlign: 'center' }}><input type="checkbox" defaultChecked/></div>)
+                                        Cell: row => (<div style={{ textAlign: 'center' }}><input type="checkbox" defaultChecked /></div>)
                                     }
                                 ]}
                             />

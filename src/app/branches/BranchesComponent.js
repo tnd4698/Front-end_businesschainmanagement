@@ -26,43 +26,46 @@ class BranchesComponent extends Component {
         this.state = { modal: false };
     }
     render() {
-        const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+        const fakeData = [{
+            branchName:'Co so 1',
+            address:'HCM',
+            manager:'Nguyen Duy Tan'
+        }
         ]
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div></div>),
+                Cell: row => (<div style={{textAlign:"center"}}>1</div>),
                 show: true
             },
             {
                 Header: 'Tên cơ sở',
-                accessor: 'id',
+                accessor: 'branchName',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Địa chỉ',
                 accessor: 'address',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Quản lý',
-                accessor: 'address',
+                accessor: 'manager',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Liên hệ',
                 accessor: 'address',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Status',
-                accessor: 'name',
+                accessor: 'status',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
@@ -98,8 +101,9 @@ class BranchesComponent extends Component {
                         <Container fluid>
                             <ReactTable
                                 data={fakeData}
-                                minRows={0}
+                                minRows={5}
                                 columns={columns}
+                                showPagination={false}
                             />
                         </Container>
                     </CardBody>

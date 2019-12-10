@@ -1,5 +1,5 @@
-const TOGGLE='TOGGLE'
+const GETMENUITEM = 'GETMENUITEM'
 
-export default {
-    TOGGLE
+export default{
+    GETMENUITEM
 }

@@ -26,20 +26,41 @@ import 'react-table/react-table.css'
 import "react-datepicker/dist/react-datepicker.css";
 
 // Views
-import Login from './utils/pages/Login'
-import Page404 from './utils/pages/Page404'
-import Page500 from './utils/pages/Page500'
+import { default as Login } from './utils/pages/login/LoginContainner'
+
+function saveToLocalStorage(state) {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function loadFromLocalStorage() {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null)
+      return undefined;
+    return JSON.parse(serializedState);
+  } catch (e) {
+    console.log(e);
+    return undefined
+  }
+}
+
+const persistedState = loadFromLocalStorage();
 
 const middleware = applyMiddleware(thunk, logger);
-const store = createStore(rootReducer, middleware);
+const store = createStore(rootReducer,persistedState, middleware);
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
       <Switch>
         <Route exact path="/login" name="Login Page" component={Login} />
-        <Route exact path="/404" name="Page 404" component={Page404} />
-        <Route exact path="/500" name="Page 500" component={Page500} />
         <Route path="/" name="Home" component={App} />
       </Switch>
     </HashRouter>

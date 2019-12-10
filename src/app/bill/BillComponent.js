@@ -10,17 +10,20 @@ import ScrollArea from 'react-scrollbar'
 
 class BillComponent extends Component {
 
-    constructor(props) {
-        super(props);
-        this.toggle = this.toggle.bind(this);
+    componentDidMount() {
+        this.props.getListMenuItem(this.props.user.branchId);
+        setTimeout(() => console.log(this.props.listMenuItem), 1000);
     }
 
-    toggle(text) {
-        this.props.fetchN(text)
-        this.props.history.push('/tuition')
-    }
     render() {
-        let props = this.props; console.log(props);
+        const menu = this.props.listMenuItem.map(item => (
+            <Col sm={3}>
+                <div className='item_menu'>
+                    <img src={require(`../../utils/${item.name.toLowerCase()}.jpg`)} className='img_item' alt="##" />
+                    <p>{item.name}</p>
+                </div>
+            </Col>
+        ));
         return (
             <div>
                 <Card>
@@ -36,30 +39,7 @@ class BillComponent extends Component {
                                     <ScrollArea>
                                         <CardBody>
                                             <Row>
-                                                <Col sm={3}>
-                                                    <div className='item_menu'>
-                                                        <img src={require('../../utils/32.png')} className='img_item' alt="##" />
-                                                        <p>tên món</p>
-                                                    </div>
-                                                </Col>
-                                                <Col sm={3}>
-                                                    <div className='item_menu'>
-                                                        <img src={require('../../utils/32.png')} className='img_item' alt="##" />
-                                                        <p>tên món</p>
-                                                    </div>
-                                                </Col>
-                                                <Col sm={3}>
-                                                    <div className='item_menu'>
-                                                        <img src={require('../../utils/32.png')} className='img_item' alt="##" />
-                                                        <p>tên món</p>
-                                                    </div>
-                                                </Col>
-                                                <Col sm={3}>
-                                                    <div className='item_menu'>
-                                                        <img src={require('../../utils/32.png')} className='img_item' alt="##" />
-                                                        <p>tên món</p>
-                                                    </div>
-                                                </Col>
+                                                {menu}
                                             </Row>
                                         </CardBody>
                                     </ScrollArea>
@@ -108,9 +88,6 @@ class BillComponent extends Component {
                         </Row>
                     </CardBody>
                 </Card>
-                <Button onClick={() => this.toggle('11111')}>111111</Button>
-                <Button onClick={() => this.toggle('22222')}>222222</Button>
-                {props.toggleText}
             </div>
         );
     }

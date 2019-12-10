@@ -1,12 +1,13 @@
 import types from './types.js';
 
-const fetchN = (value) => {
+const getMenuItem = (listMenuItem) => {
     return {
-        type: types.TOGGLE,
-        value: value
-    };
+        type: types.GETMENUITEM,
+        value: listMenuItem
+    }
 }
 
+
 export default {
-    fetchN
+    getMenuItem
 }

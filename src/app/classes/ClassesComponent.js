@@ -29,12 +29,21 @@ class ClassesComponent extends Component {
     }
     render() {
         const fakeData = [
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' },
-            { name: 'name1', age: 50, address: 'address1' },
-            { name: 'name2', age: 20, address: 'address2' },
-            { name: 'name3', age: 70, address: 'address3' }
+            {
+                id:'class298743',
+                branchName:"co so 2",
+                status:'1'
+            },
+            {
+                id:'class298743',
+                branchName:"co so 2",
+                status:'1'
+            },
+            {
+                id:'class298743',
+                branchName:"co so 2",
+                status:'1'
+            }
         ]
         const columns = [
             {
@@ -45,16 +54,19 @@ class ClassesComponent extends Component {
             {
                 Header: 'Mã lớp học',
                 accessor: 'id',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Cơ sở',
-                accessor: 'address',
+                accessor: 'branchName',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Status',
-                accessor: 'name',
+                accessor: 'status',
+                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
                 show: true
             },
             {
