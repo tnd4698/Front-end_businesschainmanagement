@@ -8,11 +8,11 @@ import { connect } from 'react-redux';
 
 
 import { default as BillComponent } from './bill/BillContainer'
-import TuitionComponent from './tuition/TuitionComponent'
+import {default as TuitionComponent} from './tuition/TuitionContainer'
 import EmployeesComponent from './employees/EmployeesComponent'
 import TimeworksComponent from './timeworks/TimeworksComponent'
 import ResourcesComponent from './resources/ResourcesComponent'
-import StudentsComponent from './students/StudentsComponent'
+import {default as StudentsComponent} from './students/StudentContainer'
 import ClassesComponent from './classes/ClassesComponent'
 import BranchDetailComponent from './branchDetail/BranchDetailComponent'
 import ImportComponent from './import/ImportComponent'
@@ -24,7 +24,7 @@ import BillReportComponent from './billReport/BillReportComponent'
 import PayrollReportComponent from './payrollReport/PayrollReportComponent'
 import ProfitReportComponent from './profitReport/ProfitReportComponent'
 import TuitionReportComponent from './tuitionReport/TuitionReportComponent'
-import HomeComponent from './home/HomeComponent'
+import {default as HomeComponent} from './home/HomeContainer'
 
 
 class App extends Component {

@@ -7,7 +7,30 @@ const getMenuItem = (listMenuItem) => {
     }
 }
 
+const addMenuItemToBill = bill => {
+    return {
+        type: types.ADDMENUITEMTOBILL,
+        value: bill
+    }
+}
+
+const removeMenuItemFromBill = bill => {
+    return {
+        type: types.REMOVEMENUITEMFROMBILL,
+        value: bill
+    }
+}
+
+const resetBill = () =>{
+    return {
+        type: types.RESETBILL,
+        value: ''
+    }
+}
 
 export default {
-    getMenuItem
+    getMenuItem,
+    addMenuItemToBill,
+    removeMenuItemFromBill,
+    resetBill
 }

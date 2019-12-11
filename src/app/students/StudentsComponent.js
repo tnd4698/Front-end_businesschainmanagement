@@ -25,80 +25,79 @@ class StudentsComponent extends Component {
 
         this.state = { modal: false };
     }
+
+    componentDidMount() {
+        this.props.getListStudent();
+        setTimeout(() => this.forceUpdate(), 1000);
+    }
     render() {
-        const fakeData = [
-            {
-                id: 'STUDENT2323',
-                name: 'nguyen duy',
-                address: 'HCM',
-                branchName: 'co so 1',
-                status: 1
-            },
-            {
-                id: 'STUDENT2323',
-                name: 'nguyen duy',
-                address: 'HCM',
-                branchName: 'co so 1',
-                status: 1
-            },
-            {
-                id: 'STUDENT2323',
-                name: 'nguyen duy',
-                address: 'HCM',
-                branchName: 'co so 1',
-                status: 1
-            },
-            {
-                id: 'STUDENT2323',
-                name: 'nguyen duy',
-                address: 'HCM',
-                branchName: 'co so 1',
-                status: 1
-            }
-        ]
+
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div style={{textAlign:"center"}}>1</div>),
+                Cell: row => (<div style={{ textAlign: "center" }}>1</div>),
                 show: true
             },
             {
                 Header: 'Mã học viên',
-                accessor: 'id',
-                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
+                accessor: 'studentID',
+                Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Họ tên',
                 accessor: 'name',
-                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
+                Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Lớp học',
-                accessor: 'address',
-                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
+                accessor: 'classID',
+                Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Cơ sở',
                 accessor: 'branchName',
-                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
+                Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
                 show: true
             },
             {
                 Header: 'Status',
                 accessor: 'status',
-                Cell: row => (<div style={{textAlign:"center"}}>{row.value}</div>),
+                Cell: row => {
+                    if (row.value == 1)
+                        return (
+                            <div style={{ textAlign: 'center' }}>
+                                <Button color='success' disabled>active</Button>
+                            </div>
+                        )
+                    else
+                        return (
+                            <div style={{ textAlign: 'center' }}>
+                                <Button color='secondary' disabled>inactive</Button>
+                            </div>
+                        )
+                },
                 show: true
             },
             {
                 Header: 'Học phí',
-                Cell: row => (
-                    <div style={{ textAlign: 'center' }}>
-                        <Button color='warning'>Thu học phí</Button>
-                    </div>
-                )
+                accessor: 'statusTuition',
+                Cell: row => {
+                    if (row.value == 0)
+                        return (
+                            <div style={{ textAlign: 'center' }}>
+                                <Button color='warning'>Thu học phí</Button>
+                            </div>
+                        )
+                    else
+                        return (
+                            <div style={{ textAlign: 'center' }}>
+                                <Button color='secondary' disabled>Thu học phí</Button>
+                            </div>
+                        )
+                }
             },
             {
                 Header: 'Active',
@@ -143,7 +142,7 @@ class StudentsComponent extends Component {
                             <hr />
                         </div>
                         <ReactTable
-                            data={fakeData}
+                            data={this.props.listStudent}
                             minRows={0}
                             columns={columns}
                         />

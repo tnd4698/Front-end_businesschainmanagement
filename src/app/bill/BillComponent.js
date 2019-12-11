@@ -7,6 +7,7 @@ import {
     Col
 } from 'reactstrap'
 import ScrollArea from 'react-scrollbar'
+import { totalmem } from 'os';
 
 class BillComponent extends Component {
 
@@ -15,15 +16,51 @@ class BillComponent extends Component {
         setTimeout(() => console.log(this.props.listMenuItem), 1000);
     }
 
+    handleAddMenuItemToBill(item) {
+        const itemMenu = item.id;
+        const count = 1;
+        const price = item.price;
+        const name = item.name;
+        this.props.addMenuItemToBill({ itemMenu, count, price, name });
+        this.forceUpdate();
+    }
+
+    handleRemoveMenuItemFromBill(billDetail) {
+        this.props.removeMenuItemFromBill(billDetail);
+        this.forceUpdate();
+    }
+
     render() {
+        const formatMoney = num => {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+
         const menu = this.props.listMenuItem.map(item => (
             <Col sm={3}>
-                <div className='item_menu'>
-                    <img src={require(`../../utils/${item.name.toLowerCase()}.jpg`)} className='img_item' alt="##" />
+                <div className='item_menu' onClick={() => this.handleAddMenuItemToBill(item)}>
+                    <img src={require(`../../utils/${item.name.toLowerCase()}.jpg`)} className='img_item' alt="##" style={{ cursor: "grabbing" }} />
                     <p>{item.name}</p>
                 </div>
             </Col>
         ));
+
+        const bill = this.props.billDetails.map(billDetail => (
+            <div onClick={() => this.handleRemoveMenuItemFromBill(billDetail)} style={{ cursor: "grabbing" }}>
+                <Row>
+                    <Col sm={5}>
+                        {billDetail.name}
+                    </Col>
+                    <Col sm={3}>
+                        {billDetail.count}
+                    </Col>
+                    <Col sm={4}>
+                        {formatMoney(billDetail.price * billDetail.count)}
+                    </Col>
+                </Row>
+                <hr />
+            </div>
+        ));
+
         return (
             <div>
                 <Card>
@@ -47,43 +84,37 @@ class BillComponent extends Component {
                             </Col>
                             <Col sm='5'>
                                 <Card className='bill'>
-                                    <CardBody>
-                                        <Row>
-                                            <Col sm={5}>
-                                                Tên món
+                                    <ScrollArea>
+                                        <CardBody>
+                                            <Row>
+                                                <Col sm={5}>
+                                                    Tên món
                                             </Col>
-                                            <Col sm={3}>
-                                                Số lượng
+                                                <Col sm={3}>
+                                                    Số lượng
                                             </Col>
-                                            <Col sm={4}>
-                                                Giá(VND)
+                                                <Col sm={4}>
+                                                    Thành tiền(VND)
                                             </Col>
-                                        </Row>
-                                        <hr />
-                                        <Row>
-                                            <Col sm={5}>
-                                                Cafe sữa
+                                            </Row>
+                                            <hr />
+                                            {bill}
+                                            <Row>
+                                                <Col sm={8}>
+                                                    Tổng
                                             </Col>
-                                            <Col sm={3}>
-                                                2
-                                            </Col>
-                                            <Col sm={4}>
-                                                10000
-                                            </Col>
-                                        </Row>
-                                        <hr />
-                                        <Row>
-                                            <Col sm={8}>
-                                                Tổng
-                                            </Col>
-                                            <Col sm={4}>
-                                                10000
-                                            </Col>
-                                        </Row>
-                                        <hr />
-                                        <Button color='primary'>Xác nhận</Button>
-                                    </CardBody>
+                                                <Col sm={4}>
+                                                    {formatMoney(this.props.billDetails.reduce((sum, cur) => sum + cur.price * cur.count, 0))}
+                                                </Col>
+                                            </Row>
+                                            <hr />
+                                        </CardBody>
+                                    </ScrollArea>
                                 </Card>
+                                <div style={{ float: "right" }}>
+                                    <Button color='success' onClick={() => { this.props.resetBill() }}>Tạo mới</Button>{' '}
+                                    <Button color='primary' onClick={() => { this.props.saveBill(this.props.billDetails) }}>Xác nhận</Button>
+                                </div>
                             </Col>
                         </Row>
                     </CardBody>

@@ -40,7 +40,7 @@ class TuitionComponent extends Component {
                                         <Input type='select' id="hf-id" name="hf-id" />
                                     </Col>
                                     <Col xs="12" md="1">
-                                        <Button color='primary'><i className="fas fa-list"></i></Button>
+                                        <Button color='primary' onClick ={()=>{this.props.history.push('/students')}}><i className="fas fa-list"></i></Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -56,7 +56,7 @@ class TuitionComponent extends Component {
                                         <Label htmlFor="hf-class">Lớp học</Label>
                                     </Col>
                                     <Col xs="12" md="8">
-                                        <Input type='select' id="hf-class" name="hf-class" />
+                                        Mã lớp
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
