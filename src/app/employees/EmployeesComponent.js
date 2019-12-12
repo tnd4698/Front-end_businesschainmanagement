@@ -25,37 +25,47 @@ class EmployeesComponent extends Component {
 
         this.state = { modal: false };
     }
+
+    componentDidMount() {
+        this.props.getListBranch();
+        this.props.getListRole();
+        if (this.props.curUser.roleName === 'BRANCHMANAGER')
+            this.props.getListEmployee(this.props.curUser.branchId);
+        else
+            this.props.getListEmployee();
+    }
+
     render() {
         const fakeData = [
             {
-                id:'EMPLOYEE29347',
-                name:'nguyen duy tan',
-                address:'',
-                branchName:'',
-                roleName:'',
-                status:''
+                id: 'EMPLOYEE29347',
+                name: 'nguyen duy tan',
+                address: '',
+                branchName: '',
+                roleName: '',
+                status: ''
             },
             {
-                id:'EMPLOYEE29347',
-                name:'nguyen duy tan',
-                address:'',
-                branchName:'',
-                roleName:'',
-                status:''
+                id: 'EMPLOYEE29347',
+                name: 'nguyen duy tan',
+                address: '',
+                branchName: '',
+                roleName: '',
+                status: ''
             },
             {
-                id:'EMPLOYEE29347',
-                name:'nguyen duy tan',
-                address:'',
-                branchName:'',
-                roleName:'',
-                status:''
+                id: 'EMPLOYEE29347',
+                name: 'nguyen duy tan',
+                address: '',
+                branchName: '',
+                roleName: '',
+                status: ''
             }
         ]
         const columns = [
             {
                 Header: '#',
-                Cell: row => (<div style={{textAlign:"center"}}>1</div>),
+                Cell: row => (<div style={{ textAlign: "center" }}>1</div>),
                 show: true
             },
             {
@@ -81,6 +91,20 @@ class EmployeesComponent extends Component {
             {
                 Header: 'Status',
                 accessor: 'status',
+                Cell: row => {
+                    if(row.value==1)
+                    return (
+                        <div style={{ textAlign: 'center' }}>
+                        <Button color='success'>active</Button>
+                        </div>
+                    )
+                    else
+                    return (
+                        <div style={{ textAlign: 'center' }}>
+                        <Button color='secondary'>inactive</Button>
+                            </div>
+                    )
+                },
                 show: true
             },
             {
@@ -88,6 +112,17 @@ class EmployeesComponent extends Component {
                 Cell: row => (<div style={{ textAlign: 'center' }}><Button color='success' onClick={() => this.setState({ modal: !this.state.modal })}>Xem</Button></div>)
             }
         ]
+
+        const listBranch = this.props.listBranch.map(branch => (
+            <option value={branch.id}>{branch.name}</option>
+        ));
+        listBranch.unshift(<option value="null">Chi nhánh</option>);
+
+        const listRole = this.props.listRole.map(role => (
+            <option value={role.id}>{role.role}</option>
+        ));
+        listRole.unshift(<option value="null">Role</option>);
+
         return (
             <div>
                 <Card>
@@ -106,25 +141,27 @@ class EmployeesComponent extends Component {
                                         </div>
                                     </InputGroup>
                                     <Input type='select' color="primary" className="float-right select_header">
-                                        <option value="">Status</option>{' '}
-                                        <option value="thuduc">active</option>
-                                        <option value="thuduc">inactive</option>
+                                        <option value="null">Status</option>
+                                        <option value="1">active</option>
+                                        <option value="0">inactive</option>
                                     </Input>
                                     <Input type='select' color="primary" className="float-right select_header">
-                                        <option value="">Role</option>
-                                        <option value="TEACHER">Teacher</option>
+                                        {listRole}
                                     </Input>
-                                    <Input type='select' color="primary" className="float-right select_header">
-                                        <option value="">Chi nhánh</option>{' '}
-                                        <option value="thuduc">Thu duc</option>
-                                    </Input>
+                                    {
+                                        this.props.curRole === '[ROLE_BUSINESSMANAGER]' &&
+                                        <Input type='select' color="primary" className="float-right select_header">
+                                            {listBranch}
+                                        </Input>
+                                    }
+
                                 </Col>
                             </Row>
                             <hr />
                         </div>
                         <Container fluid>
                             <ReactTable
-                                data={fakeData}
+                                data={this.props.listEmployee}
                                 minRows={0}
                                 columns={columns}
                             />

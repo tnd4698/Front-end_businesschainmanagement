@@ -7,11 +7,11 @@ export function getMenuItems(branchId) {
 }
 
 export function getBranches(status = '1') {
-    return httpGet(BASE_URL);
+    return httpGet(BASE_URL+`?status=${status}`);
 }
 
 export function getBranch(branchId) {
-    return httpGet(BASE_URL + `${branchId}`);
+    return httpGet(BASE_URL + `/${branchId}`);
 }
 
 export function addBranch(branchDTO) {
@@ -19,5 +19,5 @@ export function addBranch(branchDTO) {
 }
 
 export function updateBranch(branchId, branchDTO) {
-    return httpPut(BASE_URL + `${branchId}`, branchDTO);
+    return httpPut(BASE_URL + `/${branchId}`, branchDTO);
 }
