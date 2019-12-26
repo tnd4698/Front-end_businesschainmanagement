@@ -19,14 +19,14 @@ import 'font-awesome/css/font-awesome.min.css';
 // Import Simple Line Icons Set
 import 'simple-line-icons/css/simple-line-icons.css';
 
-import './utils/style.css'
+import './index.css'
 
 import 'react-table/react-table.css'
 
 import "react-datepicker/dist/react-datepicker.css";
 
 // Views
-import { default as Login } from './utils/pages/login/LoginContainner'
+import { default as Login } from './app/pages/login/LoginContainner'
 
 function saveToLocalStorage(state) {
   try {

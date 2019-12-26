@@ -7,7 +7,6 @@ import {
     Col
 } from 'reactstrap'
 import ScrollArea from 'react-scrollbar'
-import { totalmem } from 'os';
 
 class BillComponent extends Component {
 
@@ -38,7 +37,7 @@ class BillComponent extends Component {
         const menu = this.props.listMenuItem.map(item => (
             <Col sm={3}>
                 <div className='item_menu' onClick={() => this.handleAddMenuItemToBill(item)}>
-                    <img src={require(`../../utils/${item.name.toLowerCase()}.jpg`)} className='img_item' alt="##" style={{ cursor: "grabbing" }} />
+                    <img src={process.env.PUBLIC_URL +`/img/${item.name.toLowerCase()}.jpg`} className='img_item' alt="Không tìm thấy image" style={{ cursor: "grabbing" }} />
                     <p>{item.name}</p>
                 </div>
             </Col>

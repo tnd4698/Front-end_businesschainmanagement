@@ -9,6 +9,7 @@ import {
     Container,
     Input,
     InputGroup
+
 } from 'reactstrap'
 import ReactTable from 'react-table'
 import DatePicker from "react-datepicker";
@@ -18,34 +19,48 @@ class PayrollReportComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { date: new Date(), modal: false }
+        this.state = {
+            fromDate: new Date('2019-12-01'),
+            toDate: new Date(),
+            branch: 'null',
+            searchContent: ''
+        }
     }
-    render() {
-        const fakeData = [
 
-        ]
-        const columns = [
-            {
-                Header: '#',
-                Cell: row => (<div></div>),
-                show: true
-            },
-            {
-                Header: 'Cơ sở',
-                accessor: 'address',
-                show: true
-            },
-            {
-                Header: 'Chi phí',
-                accessor: 'name',
-                show: true
-            }
-        ];
+    componentDidMount() {
+        this.props.getListPayrollReport(this.state.fromDate.toISOString().split('-')[1],
+            this.state.fromDate.toISOString().split('-')[0],
+            this.state.toDate.toISOString().split('-')[1],
+            this.state.toDate.toISOString().split('-')[0],
+            this.state.branch);
+        this.props.getListBranch();
+    }
+
+    handleFilter() {
+        this.props.getListPayrollReport(this.state.fromDate.toISOString().split('-')[1],
+            this.state.fromDate.toISOString().split('-')[0],
+            this.state.toDate.toISOString().split('-')[1],
+            this.state.toDate.toISOString().split('-')[0],
+            this.state.branch);
+    }
+
+    render() {
+
         const ExampleCustomInput = ({ value, onClick }) => (
             <Button outline size='sm' color='primary' onClick={onClick}>
                 {value}
             </Button>
         );
+
+        const formatMoney = num => {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+
+        const listBranch = this.props.listBranch.map(branch => (
+            <option key={branch.id} value={branch.id}>{branch.name}</option>
+        ));
+        listBranch.unshift(<option key={0} value="null">Chi nhánh</option>);
+
         return (
             <div>
                 <Card>
@@ -57,16 +72,16 @@ class PayrollReportComponent extends Component {
                                     <Form inline>
                                         <DatePicker
                                             dateFormat="dd/MM/yyyy"
-                                            selected={this.state.date}
-                                            onChange={date => this.setState({ date: date })}
+                                            selected={this.state.fromDate}
+                                            onChange={date => this.setState({ fromDate: date }, () => this.handleFilter())}
                                             customInput={<ExampleCustomInput />}
                                         />
-                                        <i class="fas fa-angle-double-right    "></i>
+                                        <i class="fas fa-angle-double-right"></i>
                                         <InputGroup className='date'>
                                             <DatePicker
                                                 dateFormat="dd/MM/yyyy"
-                                                selected={this.state.date}
-                                                onChange={date => this.setState({ date: date })}
+                                                selected={this.state.toDate}
+                                                onChange={date => this.setState({ toDate: date }, () => this.handleFilter())}
                                                 customInput={<ExampleCustomInput />}
                                             />
                                         </InputGroup>
@@ -74,14 +89,20 @@ class PayrollReportComponent extends Component {
                                 </Col>
                                 <Col sm="8" className="d-none d-sm-inline-block">
                                     <InputGroup className='float-right search'>
-                                        <Input type="text" id="input1-group2" name="input1-group2" placeholder="Search" />
+                                        <Input type="text" id="input1-group2" placeholder="Search"
+                                            name='searchContent'
+                                            value={this.state.searchContent}
+                                            onChange={event => this.setState({ [event.target.name]: event.target.value })}
+                                        />
                                         <div className="input-group-append">
-                                            <Button color="primary"><i className="fa fa-search"></i></Button>
+                                            <Button onClick={() => this.handleSearch()} type="button" color="primary"><i className="fa fa-search"></i></Button>
                                         </div>
                                     </InputGroup>
-                                    <Input type='select' color="primary" className="float-right select_header">
-                                        <option value="">Branch</option>{' '}
-                                        <option value="thuduc">Thu duc</option>
+                                    <Input type='select' color="primary" className="float-right select_header"
+                                        name='branch'
+                                        value={this.state.branch}
+                                        onChange={event => this.setState({ [event.target.name]: event.target.value }, () => this.handleFilter())}>
+                                        {listBranch}
                                     </Input>
                                 </Col>
                             </Row>
@@ -89,10 +110,27 @@ class PayrollReportComponent extends Component {
                         </div>
                         <Container fluid>
                             <ReactTable
-                                data={fakeData}
+                                data={this.props.listPayrollReport}
                                 minRows={5}
-                                columns={columns}
-                                showPagination={false}
+                                columns={[
+                                    {
+                                        Header: '#',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.index + 1}</div>),
+                                        show: true
+                                    },
+                                    {
+                                        Header: 'Cơ sở',
+                                        accessor: 'branchName',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
+                                        show: true
+                                    },
+                                    {
+                                        Header: 'Doanh thu (VND)',
+                                        accessor: 'value',
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{formatMoney(row.value)}</div>),
+                                        show: true
+                                    }
+                                ]}
                             />
                         </Container>
                     </CardBody>

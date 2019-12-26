@@ -7,6 +7,17 @@ const getListStudent = listStudent => {
     }
 }
 
+const search = (listStudent, searchContent) => {
+    return {
+        type: types.SEARCH,
+        value: {
+            listStudent,
+            searchContent
+        }
+    }
+}
+
 export default {
-    getListStudent
+    getListStudent,
+    search
 }

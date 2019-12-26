@@ -1,5 +1,6 @@
 
+const CHOOSESTUDENT = 'CHOOSESTUDENT';
 
 export default {
-    
+    CHOOSESTUDENT
 }

@@ -11,16 +11,65 @@ import {
     Container,
     Input
 } from 'reactstrap'
-import { connect } from 'react-redux';
 
 class TuitionComponent extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = { modal: false };
+        this.state = {
+            totalMoney: 0,
+            student: {
+                id: 0
+            }
+        }
     }
+
+    componentDidMount() {
+        this.props.getListStudent(this.props.curUser.branchId, 0, 1);
+        setTimeout(() => this.setState({ student: this.props.student }), () => console.log(this.props.student), 1000);
+    }
+
+    chooseStudent(e) {
+        let student;
+        if (e.target.value !== "")
+            student = this.props.listStudent.filter(cur => cur.id == e.target.value)[0];
+        else
+            student = {
+                id: 0,
+                name: '',
+                classID: ''
+            }
+
+        this.props.chooseStudent(student);
+        this.setState({ student: student });
+    }
+
+    saveTuition() {
+        const studentId = this.props.student.id;
+        const totalMoney = this.state.totalMoney;
+        const classId = this.props.student.classId;
+        const classID = this.state.student.classID;
+        const name = this.state.student.name;
+        const studentID = this.props.student.studentID;
+        this.props.saveTuition({ studentId, totalMoney, classId,classID,name,studentID});
+        this.setState({
+            student: {
+                id: 0,
+                name: '',
+                classID: ''
+            }
+        })
+    }
+
     render() {
+        const listStudent = this.props.listStudent.map(student => (
+            <option key={student.id} value={student.id}>
+                {student.studentID} : {student.name}
+            </option>
+        ));
+        listStudent.unshift(<option key={0} value="" unselectable="true">Chọn học viên</option>);
+
         return (
             <div className='small_container'>
                 <Card>
@@ -37,10 +86,16 @@ class TuitionComponent extends Component {
                                         <Label htmlFor="hf-id">Mã học viên</Label>
                                     </Col>
                                     <Col xs="12" md="8">
-                                        <Input type='select' id="hf-id" name="hf-id" />
+                                        <Input type='select'
+                                            name='student'
+                                            value={this.state.student.id}
+                                            onChange={e => this.chooseStudent(e)}
+                                        >
+                                            {listStudent}
+                                        </Input>
                                     </Col>
                                     <Col xs="12" md="1">
-                                        <Button color='primary' onClick ={()=>{this.props.history.push('/students')}}><i className="fas fa-list"></i></Button>
+                                        <Button color='primary' onClick={() => { this.props.history.push('/students') }}><i className="fas fa-list"></i></Button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -48,7 +103,7 @@ class TuitionComponent extends Component {
                                         <Label htmlFor="hf-name">Tên học viên</Label>
                                     </Col>
                                     <Col xs="12" md="8">
-                                        Tên học viên
+                                        {this.state.student.name}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -56,7 +111,7 @@ class TuitionComponent extends Component {
                                         <Label htmlFor="hf-class">Lớp học</Label>
                                     </Col>
                                     <Col xs="12" md="8">
-                                        Mã lớp
+                                        {this.state.student.classID}
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -64,14 +119,20 @@ class TuitionComponent extends Component {
                                         <Label htmlFor="hf-tuition">Số tiền thu(VND)</Label>
                                     </Col>
                                     <Col xs="12" md="8">
-                                        <Input type='number'/>
+                                        <Input type='number'
+                                            name='totalMoney'
+                                            value={this.state.totalMoney}
+                                            onChange={e => this.setState({ totalMoney: e.target.value })}
+                                        />
                                     </Col>
                                 </FormGroup>
                             </Form>
                         </Container>
                     </CardBody>
                     <CardFooter>
-                        <Button className='float-right' color='primary'>Xác nhận</Button>
+                        <Button className='float-right' color='primary'
+                            onClick={() => this.saveTuition()}>
+                            Xác nhận</Button>
                     </CardFooter>
                 </Card>
                 {this.props.toggleText}
@@ -79,16 +140,5 @@ class TuitionComponent extends Component {
         );
     }
 }
-const mapStateToProps = (state) => {
-    const { toggleText } = state.bill;
-    return {
-      toggleText
-    }
-  };
-  
 
-  
-  export default connect(
-    mapStateToProps,
-    null
-  )(TuitionComponent);
+export default TuitionComponent;

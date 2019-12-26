@@ -18,6 +18,6 @@ export function addShipways(shipways) {
     return httpPost(BASE_URL+"/shipway", shipways);
 }
 
-export function addImport(shipways) {
+export function addImport(imports) {
     return httpPost(BASE_URL+"/import", imports);
 }

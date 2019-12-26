@@ -39,6 +39,7 @@ const logout = () => {
             .finally(
                 () => {
                     dispatch(actions.logout());
+                    setTimeout(()=>localStorage.clear(),1000)
                 }
             )
     }

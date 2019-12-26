@@ -63,7 +63,7 @@ export default {
     },
     {
       name: 'Thông tin cơ sở',
-      url: '/branchs/98488',
+      url: '/branchs/1',
       icon: 'icon-info'
     }
   ],

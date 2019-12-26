@@ -7,11 +7,11 @@ export function addSpend(spend) {
 }
 
 export function getPayrolls(month = 10, year = 2019, branch = 'null', role = 'null') {
-    return httpGet(BASE_URL + `/payroll?month=${month}&year=${year}&branch=${branch}&role=${role}`, spend);
+    return httpGet(BASE_URL + `/payroll?month=${month}&year=${year}&branch=${branch}&role=${role}`);
 }
 
 export function addPayrolls(payrolls) {
-    return httpPost(BASE_URL + "payroll", payrolls);
+    return httpPost(BASE_URL + "/payroll", payrolls);
 }
 
 export function getReportSales(fromDate = '2019/11/01', toDate = '2019/11/30', branch = 'null') {

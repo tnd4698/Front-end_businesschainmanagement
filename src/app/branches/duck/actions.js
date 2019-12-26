@@ -7,6 +7,17 @@ const getListBranch = listBranch => {
     }
 }
 
+const search = (listBranch,searchContent) => {
+    return {
+        type: types.SEARCH,
+        value: {
+            listBranch,
+            searchContent
+        }
+    }
+}
+
 export default {
-    getListBranch
+    getListBranch,
+    search
 }

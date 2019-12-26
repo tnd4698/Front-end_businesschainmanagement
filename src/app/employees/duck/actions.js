@@ -14,7 +14,19 @@ const getListEmployee = listEmployee => {
     }
 }
 
+const search = (listEmployee, searchContent) => {
+    return {
+        type: types.SEARCH,
+        value: {
+            listEmployee,
+            searchContent
+        }
+    }
+}
+
+
 export default {
     getListRole,
-    getListEmployee
+    getListEmployee,
+    search
 }
