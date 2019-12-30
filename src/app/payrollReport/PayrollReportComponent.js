@@ -125,7 +125,7 @@ class PayrollReportComponent extends Component {
                                         show: true
                                     },
                                     {
-                                        Header: 'Doanh thu (VND)',
+                                        Header: 'Tổng (VND)',
                                         accessor: 'value',
                                         Cell: row => (<div style={{ textAlign: "center" }}>{formatMoney(row.value)}</div>),
                                         show: true

@@ -17,6 +17,7 @@ const saveTuition = tuition => {
         addTuition(tuition)
             .then(res => {
                 alert(res.data.returnMessage);
+                
                 if (res.data.returnCode === '1'){
                     var doc = new jsPDF('p', 'pt');
                     doc.setFontSize(30);
@@ -38,7 +39,7 @@ const saveTuition = tuition => {
 
                     doc.save(process.env.PUBLIC_URL + '/tuition/tuition.pdf');
                 }
-                    
+                window.location.reload();
             });
     }
 }

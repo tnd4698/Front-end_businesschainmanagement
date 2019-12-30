@@ -14,7 +14,7 @@ export function httpPut(url, body) {
 }
 
 function callApi(url, method, body = null) {
-    const headers = { 'Content-Type': 'application/json; charset=utf-8' };
+    const headers = { 'Content-Type': 'application/json' };
     const meta = {
         method,
         headers,

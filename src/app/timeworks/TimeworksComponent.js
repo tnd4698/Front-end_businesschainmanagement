@@ -28,7 +28,11 @@ class TimeworksComponent extends Component {
             branch: 'null',
             fromDate: new Date('2019-12-01'),
             toDate: new Date(),
-            timeworks: [],
+            timeworks: [
+                {
+                    date: ''
+                }
+            ],
             date: (new Date()).toISOString().split('T')[0],
             searchContent: ''
         }
@@ -44,8 +48,8 @@ class TimeworksComponent extends Component {
 
     handleAddToggle() {
         this.props.getListNewTimework(this.state.date, this.props.curUser.branchId);
-        setTimeout(()=>this.setState({ timeworks: this.props.listNewTimework },
-            () => this.setState({ modalAdd: !this.state.modalAdd })),1000)
+        setTimeout(() => this.setState({ timeworks: this.props.listNewTimework },
+            () => this.setState({ modalAdd: !this.state.modalAdd })), 1000)
 
     }
 
@@ -59,13 +63,13 @@ class TimeworksComponent extends Component {
         this.props.saveTimeworks(this.state.timeworks);
     }
 
-    handleUpdateToggle(date,branchId) {
-        this.props.getListTimework(date,branchId);
-        setTimeout(()=>this.setState({ timeworks: this.props.listTimework },
-            () => this.setState({ modalUpdate: !this.state.modalUpdate })),1000)
+    handleUpdateToggle(date, branchId) {
+        this.props.getListTimework(date, branchId);
+        setTimeout(() => this.setState({ timeworks: this.props.listTimework },
+            () => this.setState({ modalUpdate: !this.state.modalUpdate })), 1000)
     }
 
-    handleUpdateTimeworks(){
+    handleUpdateTimeworks() {
         this.props.updateTimeworks(this.state.timeworks);
     }
 
@@ -160,7 +164,7 @@ class TimeworksComponent extends Component {
                                 minRows={5}
                                 getTrProps={(state, rowInfo) => {
                                     return {
-                                        onClick: (e) => this.handleUpdateToggle(rowInfo.original.date,rowInfo.original.branchId)
+                                        onClick: (e) => this.handleUpdateToggle(rowInfo.original.date, rowInfo.original.branchId)
                                     }
                                 }}
                                 columns={[
@@ -249,7 +253,7 @@ class TimeworksComponent extends Component {
                     <ModalHeader toggle={() => this.setState({ modalUpdate: !this.state.modalUpdate })}>
                         <h5>Timework</h5>
                         <Input type='date'
-                            value={this.state.date}
+                            value={this.state.timeworks[0].date}
                         />
                     </ModalHeader>
                     <ModalBody>

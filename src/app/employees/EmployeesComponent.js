@@ -70,7 +70,12 @@ class EmployeesComponent extends Component {
 
     handleUpdateChange(event) {
         let employee = this.state.employeeUpdate;
-        employee[event.target.name] = event.target.value;
+        if (event.target.name == 'status') {
+            employee.status = employee.status==0?1:0;
+        }
+        else {
+            employee[event.target.name] = event.target.value;
+        }
         this.setState({ employeeUpdate: employee })
     }
 
@@ -102,9 +107,9 @@ class EmployeesComponent extends Component {
             this.handleFilter();
         else {
             if (this.props.curUser.roleName === 'BRANCHMANAGER')
-                this.props.search(this.state.searchContent,this.props.curUser.branchId, this.state.filter.role, this.state.filter.status);
+                this.props.search(this.state.searchContent, this.props.curUser.branchId, this.state.filter.role, this.state.filter.status);
             else
-                this.props.search(this.state.searchContent,this.state.filter.branch, this.state.filter.role, this.state.filter.status);
+                this.props.search(this.state.searchContent, this.state.filter.branch, this.state.filter.role, this.state.filter.status);
         }
         this.forceUpdate();
     }
@@ -175,7 +180,7 @@ class EmployeesComponent extends Component {
                                 columns={[
                                     {
                                         Header: '#',
-                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.index+1}</div>),
+                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.index + 1}</div>),
                                         show: true
                                     },
                                     {
@@ -331,19 +336,37 @@ class EmployeesComponent extends Component {
                                         <Label htmlFor="hf-name">Vị trí công việc</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='select'
-                                            name='roleId'
-                                            value={this.state.employee.roleId}
-                                            onChange={event => this.handleInputChange(event)}
-                                            required>
-                                            <option value='' unselectable="true">Role</option>
-                                            <option value={this.props.listRole.filter(role => role.role === 'STAFF').length > 0
-                                                ? this.props.listRole.filter(role => role.role === 'STAFF')[0].id : -1}
-                                            >Nhân viên phục vụ</option>
-                                            <option value={this.props.listRole.filter(role => role.role === 'TEACHER').length > 0
-                                                ? this.props.listRole.filter(role => role.role === 'TEACHER')[0].id : -1}
-                                            >Giảng viên</option>
-                                        </Input>
+                                        {
+                                            this.props.curRole === '[ROLE_BRANCHMANAGER]' &&
+                                            <Input type='select'
+                                                name='roleId'
+                                                value={this.state.employee.roleId}
+                                                onChange={event => this.handleInputChange(event)}
+                                                required>
+                                                <option value='' unselectable="true">Role</option>
+                                                <option value={this.props.listRole.filter(role => role.role === 'STAFF').length > 0
+                                                    ? this.props.listRole.filter(role => role.role === 'STAFF')[0].id : -1}
+                                                >Nhân viên phục vụ</option>
+                                                <option value={this.props.listRole.filter(role => role.role === 'TEACHER').length > 0
+                                                    ? this.props.listRole.filter(role => role.role === 'TEACHER')[0].id : -1}
+                                                >Giảng viên</option>
+                                            </Input>
+                                        }
+                                        {
+                                            this.props.curRole === '[ROLE_BUSINESSMANAGER]' &&
+                                            <Input type='select'
+                                                name='roleId'
+                                                value={this.state.employee.roleId}
+                                                onChange={event => this.handleInputChange(event)}
+                                                required>
+                                                <option value='' unselectable="true">Role</option>
+                                                {
+                                                    this.props.listRole.map(role => (
+                                                        <option key={role.id} value={role.id}>{role.role}</option>
+                                                    ))
+                                                }
+                                            </Input>
+                                        }
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -494,19 +517,37 @@ class EmployeesComponent extends Component {
                                         <Label htmlFor="hf-name">Vị trí công việc</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <Input type='select'
-                                            name='roleId'
-                                            value={this.state.employeeUpdate.roleId}
-                                            onChange={event => this.handleUpdateChange(event)}
-                                            required>
-                                            <option value='' unselectable="true">Role</option>
-                                            <option value={this.props.listRole.filter(role => role.role === 'STAFF').length > 0
-                                                ? this.props.listRole.filter(role => role.role === 'STAFF')[0].id : -1}
-                                            >Nhân viên phục vụ</option>
-                                            <option value={this.props.listRole.filter(role => role.role === 'TEACHER').length > 0
-                                                ? this.props.listRole.filter(role => role.role === 'TEACHER')[0].id : -1}
-                                            >Giảng viên</option>
-                                        </Input>
+                                        {
+                                            this.props.curRole === '[ROLE_BRANCHMANAGER]' &&
+                                            <Input type='select'
+                                                name='roleId'
+                                                value={this.state.employeeUpdate.roleId}
+                                                onChange={event => this.handleUpdateChange(event)}
+                                                required>
+                                                <option value='' unselectable="true">Role</option>
+                                                <option value={this.props.listRole.filter(role => role.role === 'STAFF').length > 0
+                                                    ? this.props.listRole.filter(role => role.role === 'STAFF')[0].id : -1}
+                                                >Nhân viên phục vụ</option>
+                                                <option value={this.props.listRole.filter(role => role.role === 'TEACHER').length > 0
+                                                    ? this.props.listRole.filter(role => role.role === 'TEACHER')[0].id : -1}
+                                                >Giảng viên</option>
+                                            </Input>
+                                        }
+                                        {
+                                            this.props.curRole === '[ROLE_BUSINESSMANAGER]' &&
+                                            <Input type='select'
+                                                name='roleId'
+                                                value={this.state.employeeUpdate.roleId}
+                                                onChange={event => this.handleUpdateChange(event)}
+                                                required>
+                                                <option value='' unselectable="true">Role</option>
+                                                {
+                                                    this.props.listRole.map(role => (
+                                                        <option key={role.id} value={role.id}>{role.role}</option>
+                                                    ))
+                                                }
+                                            </Input>
+                                        }
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -544,6 +585,21 @@ class EmployeesComponent extends Component {
                                         <Input type='number'
                                             name='salary'
                                             value={this.state.employeeUpdate.salary}
+                                            onChange={event => this.handleUpdateChange(event)}
+                                            required />
+                                    </Col>
+                                    <FormGroup row>
+
+                                    </FormGroup>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label htmlFor="hf-name">Trạng thái hoạt động</Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <Input type='checkbox'
+                                            name='status'
+                                            checked={this.state.employeeUpdate.status}
                                             onChange={event => this.handleUpdateChange(event)}
                                             required />
                                     </Col>

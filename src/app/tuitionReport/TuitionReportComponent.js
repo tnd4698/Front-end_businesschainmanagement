@@ -21,7 +21,7 @@ class TuitionReportComponent extends Component {
         super(props);
         this.state = {
             fromDate: new Date('2019-12-01'),
-            toDate: new Date(),
+            toDate: new Date('2020-01-08'),
             branch: 'null',
             searchContent: ''
         }

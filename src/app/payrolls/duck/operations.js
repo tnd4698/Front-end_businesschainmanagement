@@ -7,7 +7,7 @@ import {
 const getListPayroll = (month,year,branch='null',role='null')=>{
     return dispatch => {
         getPayrolls(month,year,branch,role)
-        .then(res=>{console.log(branch,'-',role);
+        .then(res=>{console.log(res)
             dispatch(actions.getListPayroll(res.data));
         })
     }

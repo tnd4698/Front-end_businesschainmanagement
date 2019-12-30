@@ -109,8 +109,10 @@ class StudentsComponent extends Component {
                             <Row>
                                 <Col sm="4">
                                     <h4 className="mb-0" style={{ display: "inline" }}><strong>Quản lý học viên</strong></h4>{' '}
-                                    <Button outline color='info' style={{ display: "inline" }} onClick={() => this.setState({ modalAdd: !this.state.modalAdd })}>+</Button>
-                                </Col>
+                                    {
+                                        this.props.curRole==="[ROLE_BRANCHMANAGER]" &&
+                                        <Button outline color='info' style={{ display: "inline" }} onClick={() => this.setState({ modalAdd: !this.state.modalAdd })}>+</Button>
+                                    }                                </Col>
                                 <Col sm="8" className="d-none d-sm-inline-block">
                                     <InputGroup className='float-right search'>
                                         <Input type="text" id="input1-group2" placeholder="Search"
@@ -134,7 +136,7 @@ class StudentsComponent extends Component {
                                         name='tuition'
                                         value={this.state.filter.tuition}
                                         onChange={event => this.handleFilterChange(event)}>
-                                        <option value="null">Status</option>
+                                        <option value="null">Học phí</option>
                                         <option value={1}>Đã thu</option>
                                         <option value={0}>Chưa thu</option>
                                     </Input>
@@ -157,7 +159,7 @@ class StudentsComponent extends Component {
                             columns={[
                                 {
                                     Header: '#',
-                                    Cell: row => (<div style={{ textAlign: "center" }}>1</div>),
+                                    Cell: row => (<div style={{ textAlign: "center" }}>{row.index+1}</div>),
                                     show: true
                                 },
                                 {
@@ -207,7 +209,7 @@ class StudentsComponent extends Component {
                                     Header: 'Học phí',
                                     accessor: 'statusTuition',
                                     Cell: row => {
-                                        if (row.value === 0)
+                                        if (row.value === 0 && row.original.status==1)
                                             return (
                                                 <div style={{ textAlign: 'center' }}>
                                                     <Button color='warning'

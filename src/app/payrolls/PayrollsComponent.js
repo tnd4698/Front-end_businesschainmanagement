@@ -53,7 +53,7 @@ class PayrollsComponent extends Component {
         if (this.state.searchContent === '')
             this.handleFilter();
         else {
-                this.props.search(this.state.searchContent,this.props.curUser.branchId, this.state.filter.role, this.state.filter.status);
+                // this.props.search(this.state.searchContent,this.props.curUser.branchId, this.state.filter.role, this.state.filter.status);
         }
         this.forceUpdate();
     }
@@ -75,10 +75,18 @@ class PayrollsComponent extends Component {
     }
 
     savePayroll(){
-        this.props.savePayroll(this.props.listPayroll);
+        const listPayroll = this.props.listPayroll.map(payroll => {
+            payroll.totalMoney = Math.ceil(payroll.salary * (30 - payroll.absent) / 30 + parseInt(payroll.other));
+            return payroll;
+        })
+        this.props.savePayroll(listPayroll);
     }
 
     render() {
+
+        const formatMoney = num => {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
 
         const listBranch = this.props.listBranch.map(branch => (
             <option key={branch.id} value={branch.id}>{branch.name}</option>
@@ -162,7 +170,7 @@ class PayrollsComponent extends Component {
                                 {
                                     Header: 'Lương cơ bản',
                                     accessor: 'salary',
-                                    Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
+                                    Cell: row => (<div style={{ textAlign: "center" }}>{formatMoney(row.value)}</div>),
                                     show: true
                                 },
                                 {
@@ -180,7 +188,7 @@ class PayrollsComponent extends Component {
                                 {
                                     Header: 'Tổng',
                                     accessor: 'totalMoney',
-                                    Cell: row => (<div style={{ textAlign: "center" }}>{row.original.salary * (30 - row.original.absent) / 30 + parseInt(row.original.other)}</div>),
+                                    Cell: row => (<div style={{ textAlign: "center" }}>{formatMoney(Math.ceil(row.original.salary * (30 - row.original.absent) / 30 + parseInt(row.original.other)))}</div>),
                                     show: true
                                 },
                                 {

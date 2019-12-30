@@ -104,7 +104,7 @@ class ClassesComponent extends Component {
     handleChangeStatus(e) {
         let classs = this.state.class;
         classs.status = classs.status === 0 ? 1 : 0;
-        this.setState({ class: classs }, () => console.log(this.state.class.status))
+        this.setState({ class: classs }, () => console.log(this.state.class))
     }
 
     handleSaveClass() {
@@ -141,15 +141,10 @@ class ClassesComponent extends Component {
     }
 
     handleUpdateClass() {
-        const listStudent = this.props.listStudent.filter(student => {
-            let rs = false;
-            for (let i = 0; i < this.state.class.students.length; i++) {
-                if (this.state.class.students[i].value === student.id) {
-                    rs = true;
-                    break;
-                }
+        const listStudent = this.state.class.students.map(cur=>{
+            return {
+                id: cur.value
             }
-            return rs;
         })
         const listShift = this.props.listShift.filter(shift => {
             let rs = false;
@@ -166,7 +161,6 @@ class ClassesComponent extends Component {
         classs.students = listStudent;
         classs.shifts = listShift;
         classs.branchId = this.props.curUser.branchId;
-        classs.status = 1;
         this.setState({ class: classs }, () => {
             this.props.updateClass(this.state.class);
         })
@@ -271,7 +265,7 @@ class ClassesComponent extends Component {
                                     },
                                     {
                                         Header: 'Mã lớp học',
-                                        accessor: 'id',
+                                        accessor: 'classID',
                                         Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
                                         show: true
                                     },
@@ -284,13 +278,20 @@ class ClassesComponent extends Component {
                                     {
                                         Header: 'Status',
                                         accessor: 'status',
-                                        Cell: row => (<div style={{ textAlign: "center" }}>{row.value}</div>),
+                                        Cell: row => (<div style={{ textAlign: "center" }}>
+                                            {
+                                                row.value===1 && <Button color='success'>Active</Button>
+                                            }
+                                            {
+                                                row.value===0 && <Button color='secondary'>inactive</Button>
+                                            }
+                                            </div>),
                                         show: true
                                     },
                                     {
                                         Header: 'Active',
                                         accessor: 'id',
-                                        Cell: row => (<div style={{ textAlign: 'center' }}><Button color='success' onClick={() => this.handleViewClass(row.value)}>Xem</Button></div>)
+                                        Cell: row => (<div style={{ textAlign: 'center' }}><Button color='primary' onClick={() => this.handleViewClass(row.value)}>Xem</Button></div>)
                                     }
                                 ]}
                             />
